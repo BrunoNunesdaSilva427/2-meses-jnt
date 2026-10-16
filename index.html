@@ -143,9 +143,9 @@ var W=innerWidth,H=innerHeight;addEventListener("resize",function(){W=innerWidth
 
 /* horário */
 function horaBR(){try{var p=new Intl.DateTimeFormat("en-GB",{timeZone:"America/Sao_Paulo",hour:"numeric",hour12:false}).formatToParts(new Date()).filter(function(x){return x.type=="hour"})[0];return parseInt(p.value,10)%24}catch(e){return new Date(Date.now()-3*36e5).getUTCHours()}}
-function tema(){var hr=horaBR(),per=hr>=5&&hr<12?"morning":hr<18?"afternoon":"night";
-document.body.className=per;
-var hi=per=="morning"?"Bom dia":per=="afternoon"?"Boa tarde":"Boa noite",ic=per=="morning"?"☀️":per=="afternoon"?"🌤️":"✨";
+function tema(){var hr=horaBR(),per=hr<5?"dawn":hr<12?"morning":hr<18?"afternoon":"night";
+document.body.className=per=="dawn"?"night dawn":per;
+var hi=per=="dawn"?"Boa madrugada":per=="morning"?"Bom dia":per=="afternoon"?"Boa tarde":"Boa noite",ic=per=="morning"?"☀️":per=="afternoon"?"🌤️":"✨";
 $("hi").textContent=hi+" "+ic;$("hi2").textContent=hi;document.title=hi+", Elanie "+ic}
 tema();setInterval(tema,60000);
 
